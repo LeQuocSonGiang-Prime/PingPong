@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    // background-image: url(./bg2.jpg);
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #77bbff 0%, #d6b4f5 100%);
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    #breakOut{
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+    .text{
+        text-transform: uppercase;
+        font-weight: 700;
+        color: #34495e;
+        letter-spacing: 5px;
+    }
+}

@@ -123,8 +123,6 @@ function ballPaddleCollision() {
         ball.dx = ball.speed * Math.sin(angle);
         ball.dy = -ball.speed * Math.cos(angle);
 
-       
-
 
     }
 }
@@ -159,7 +157,7 @@ function createBricks() {
     }
 }
 
-createBricks();
+//createBricks();
 
 function drawBricks() {
     for (let r = 0; r < brick.row; r++) {
@@ -230,7 +228,7 @@ function levelUp() {
         }
 
         brick.row = level;
-        ball.speed += 1;
+
         createBricks();
         resetBall();
 
@@ -264,12 +262,13 @@ function moveBrick() {
                 }
             }
         }
+        ball.speed = 6
     } else if (level === 4) {
         for (let r = 0; r < brick.row; r++) {
             for (let c = 0; c < brick.column; c++) {
                 let b = bricks[r][c];
                 if (b.status) {
-                    b.y += 0.3
+                    b.y += 0.2
                     m += k
                     if (b.x > 500) {
                         k = -2
@@ -288,7 +287,7 @@ function moveBrick() {
                     }
                 }
             }
-        }
+        } ball.speed = 7
     } else if (level === 2) {
         for (let r = 0; r < brick.row; r++) {
             for (let c = 0; c < brick.column; c++) {
@@ -313,7 +312,7 @@ function moveBrick() {
 
                 }
             }
-        }
+        } ball.speed = 5
     }
 }
 
@@ -325,11 +324,15 @@ function draw() {
     drawBricks();
     showGamePoints("SCORE: " + score, 25, 30);
     showGamePoints("LIFE: " + life, cvs.width - 100, 30);
-   //                                                                                                                                                                                                                                                                                                    showGamePoints("LEVEL: " + level, cvs.width / 2 - 40, 30);
+    //                                                                                                                                                                                                                                                                                                    showGamePoints("LEVEL: " + level, cvs.width / 2 - 40, 30);
 
 }
 
-draw()
+//draw()
+
+function createDataBeforeStart() {
+    createBricks()
+}
 
 function update() {
     movePaddle();
@@ -356,15 +359,21 @@ function loop() {
 
 
 function startGame() {
-    
+
 
     let selectLevel = document.querySelector('#level')
 
-    selectLevel.addEventListener('change', function(){
-      level = parseInt(this.value)
-      brick.row = level
-        console.log(typeof brick.row)
+
+    selectLevel.addEventListener('change', function (event) {
+        //    if(event.key == 'arrowLeft' || event.key == 'arrowRight' || event.key=='arrowDown' || event.key == 'arrowUp')
+        //    {event.preventDefault()}
+        level = parseInt(this.value)
+        brick.row = level
+        createDataBeforeStart()
+        resetBall()
+
     })
+    createDataBeforeStart()
 
     let btnStartGame = document.querySelector('#btn-start')
     btnStartGame.onclick = function () {
